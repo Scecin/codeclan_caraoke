@@ -34,3 +34,8 @@ class Room:
 
     def remove_song_from_room(self, song):
         self.songs.remove(song)
+
+    def favourite_song_in_room(self, favourite_song):
+        for song in self.songs:
+            if song.name == favourite_song:
+                return "Whoo!"

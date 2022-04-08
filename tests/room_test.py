@@ -6,11 +6,11 @@ from src.song import Song
 
 class TestRoom(unittest.TestCase):
     def setUp(self):
-        self.guest_1 = Guest("Anna", 100)
-        self.guest_2 = Guest("David", 200)
-        self.guest_3 = Guest("Emma", 150)
-        self.guest_4 = Guest("Tom", 50)
-        self.guest_5 = Guest("Sean", 10)
+        self.guest_1 = Guest("Anna", 100, "Dancing Queen")
+        self.guest_2 = Guest("David", 200, "Wannabe")
+        self.guest_3 = Guest("Emma", 150, "Bohemian Rhapsody")
+        self.guest_4 = Guest("Tom", 50, "Don't Stop Believin")
+        self.guest_5 = Guest("Sean", 10, "Shallow")
 
         guests = [self.guest_1, self.guest_2, self.guest_3]
 
@@ -56,3 +56,6 @@ class TestRoom(unittest.TestCase):
         self.room.check_in_guest_to_room(self.guest_5, self.room)
         self.assertEqual("Sorry, either the room is full or the funds are insufficient at this time. Please try again later.",
         self.room.check_in_guest_to_room(self.guest_5, self.room)) 
+
+    def test_check_room_has_favourite_song(self):
+        self.assertEqual("Whoo!", self.room.favourite_song_in_room(self.guest_1.favourite_song))

@@ -6,8 +6,8 @@ from src.song import Song
 
 class TestGuest(unittest.TestCase):
     def setUp(self):
-        self.guest = Guest("Anna", 100)
-        self.guest_2 = Guest("Sean", 10)
+        self.guest = Guest("Anna", 100, "Dancing Queen")
+        self.guest_2 = Guest("Sean", 10, "Wannabe")
 
         self.song = Song( "Dancing Queen", "ABBA")
 
@@ -18,6 +18,9 @@ class TestGuest(unittest.TestCase):
 
     def test_guest_has_cash(self):
         self.assertEqual(100, self.guest.cash)
+
+    def test_guest_has_favourite_song(self):
+        self.assertEqual("Dancing Queen", self.guest.favourite_song)
     
     def test_has_sufficient_founds(self):
         self.assertEqual(True, self.guest.sufficient_founds(self.room))
@@ -28,4 +31,3 @@ class TestGuest(unittest.TestCase):
     def test_pay_entry_fee(self):
         self.assertEqual(87.01, self.guest.pay_entry_fee(self.room))
     
-    # def test_pay_entry_fee(self, guest,room):
