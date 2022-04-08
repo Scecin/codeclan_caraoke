@@ -4,12 +4,13 @@ from src.guest import Guest
 
 
 class Room:
-    def __init__(self, init_name, init_guests, init_songs, init_price):
+    def __init__(self, init_name, init_guests, init_songs, init_price, init_bar):
 
         self.name = init_name
         self.guests = init_guests
         self.songs = init_songs
         self.price = init_price
+        self.bar = init_bar
     
     def total_guests_in_room(self):
         return len(self.guests)
@@ -39,3 +40,5 @@ class Room:
         for song in self.songs:
             if song.name == favourite_song:
                 return "Whoo!"
+    
+    

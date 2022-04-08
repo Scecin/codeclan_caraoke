@@ -20,7 +20,7 @@ class TestRoom(unittest.TestCase):
 
         songs = [self.song_1, self.song_2]
 
-        self.room = Room("Lucky voice", guests, songs, 12.99)
+        self.room = Room("Lucky voice", guests, songs, 12.99, 0)
     
     def test_room_has_name(self):
         self.assertCountEqual("Lucky voice", self.room.name)

@@ -11,7 +11,7 @@ class TestGuest(unittest.TestCase):
 
         self.song = Song( "Dancing Queen", "ABBA")
 
-        self.room = Room("Lucky voice", self.guest, self.song, 12.99)
+        self.room = Room("Lucky voice", self.guest, self.song, 12.99, 0)
     
     def test_guest_has_name(self):
         self.assertEqual("Anna", self.guest.name)
@@ -27,7 +27,4 @@ class TestGuest(unittest.TestCase):
 
     def test_not_have_sufficient_founds(self):
         self.assertEqual(False, self.guest_2.sufficient_founds(self.room))
-
-    def test_pay_entry_fee(self):
-        self.assertEqual(87.01, self.guest.pay_entry_fee(self.room))
     
