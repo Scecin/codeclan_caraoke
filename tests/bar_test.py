@@ -25,14 +25,14 @@ class TestBar(unittest.TestCase):
     def test_bar_has_sales(self):
         self.assertEqual(0, self.bar.sales)
 
-    def test_sell_ticket(self):
-        self.assertEqual(12.99, self.bar.sell_ticket(self.room.price))
+    def test_increase_entry_fee_in_sales(self):
+        self.bar.increase_entry_fee(self.room.price)
+        self.assertEqual(12.99, self.bar.total_sales())
+
+    def test_increase_drink_price_in_sales(self):
+        self.bar.increase_drink_price(self.drink.price)
+        self.assertEqual(8.99, self.bar.total_sales())
     
-    def test_sell_food(self):
-        self.assertEqual(12.99, self.bar.sell_food(self.food.price))
-
-    def test_sell_drink(self):
-        self.assertEqual(8.99, self.bar.sell_drink(self.drink.price))
-
-    def test_total_sales(self):
-        self.assertEqual(0, self.bar.total_sales())
+    def test_increase_food_price_in_sales(self):
+        self.bar.increase_food_price(self.food.price)
+        self.assertEqual(12.99, self.bar.total_sales())

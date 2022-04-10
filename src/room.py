@@ -1,6 +1,8 @@
 from multiprocessing import cpu_count
+from unicodedata import name
 
 from src.guest import Guest
+from src.bar import Bar
 
 
 class Room:
@@ -21,8 +23,10 @@ class Room:
         if capacity < 4 and has_money == True:
             self.guests.append(guest)
             capacity += 1
+        elif has_money == False:
+            return "Funds are insufficient. Please try again later."
         else:
-            return "Sorry, either the room is full or the funds are insufficient at this time. Please try again later."
+            return "Sorry, the room is full. Please try again later."
 
     def check_out_guests_from_room(self, guest):
         self.guests.remove(guest)
@@ -41,4 +45,8 @@ class Room:
             if song.name == favourite_song:
                 return "Whoo!"
     
+    def sell_entry_fee (self, guest, bar, ticket_price):
+        guest.spend_cash(ticket_price)
+        bar.increase_entry_fee(ticket_price)
     
+        

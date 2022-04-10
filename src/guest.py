@@ -7,3 +7,6 @@ class Guest:
     def sufficient_founds(self, room):
         return self.cash >= room.price
 
+    def spend_cash(self, amount):
+        self.cash -= amount
+

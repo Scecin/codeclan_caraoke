@@ -1,5 +1,6 @@
 import unittest
 
+from src.bar import Bar
 from src.guest import Guest
 from src.room import Room
 from src.song import Song
@@ -12,6 +13,8 @@ class TestRoom(unittest.TestCase):
         self.guest_4 = Guest("Tom", 50, "Don't Stop Believin")
         self.guest_5 = Guest("Sean", 10, "Shallow")
 
+        self.bar = Bar(0)
+
         guests = [self.guest_1, self.guest_2, self.guest_3]
 
         self.song_1 = Song( "Dancing Queen", "ABBA")
@@ -20,7 +23,7 @@ class TestRoom(unittest.TestCase):
 
         songs = [self.song_1, self.song_2]
 
-        self.room = Room("Lucky voice", guests, songs, 12.99, 0)
+        self.room = Room("Lucky voice", guests, songs, 12.99, self.bar)
     
     def test_room_has_name(self):
         self.assertCountEqual("Lucky voice", self.room.name)
@@ -49,13 +52,21 @@ class TestRoom(unittest.TestCase):
 
     def test_check_room_is_full(self):
         self.room.check_in_guest_to_room(self.guest_4, self.room)
-        self.assertEqual("Sorry, either the room is full or the funds are insufficient at this time. Please try again later.",
+        self.assertEqual("Sorry, the room is full. Please try again later.",
         self.room.check_in_guest_to_room(self.guest_4, self.room))
     
     def test_check_not_enought_founds(self):
         self.room.check_in_guest_to_room(self.guest_5, self.room)
-        self.assertEqual("Sorry, either the room is full or the funds are insufficient at this time. Please try again later.",
+        self.assertEqual( "Funds are insufficient. Please try again later.",
         self.room.check_in_guest_to_room(self.guest_5, self.room)) 
 
     def test_check_room_has_favourite_song(self):
         self.assertEqual("Whoo!", self.room.favourite_song_in_room(self.guest_1.favourite_song))
+    
+    def test_check_sell_ticket_in_bar_reduce_guest_cash(self):
+        self.room.sell_entry_fee(self.guest_1, self.bar, self.room.price)
+        self.assertEqual(87.01, self.guest_1.cash)
+
+    def test_check_sell_ticket_in_bar_increase_bar_sales(self):
+        self.room.sell_entry_fee(self.guest_1, self.bar, self.room.price)
+        self.assertEqual(12.99, self.bar.sales)

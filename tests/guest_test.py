@@ -22,9 +22,17 @@ class TestGuest(unittest.TestCase):
     def test_guest_has_favourite_song(self):
         self.assertEqual("Dancing Queen", self.guest.favourite_song)
     
+    def test_can_reduce_cash(self):
+        self.guest.spend_cash(50)
+        self.assertEqual(50, self.guest.cash)
+    
     def test_has_sufficient_founds(self):
         self.assertEqual(True, self.guest.sufficient_founds(self.room))
 
     def test_not_have_sufficient_founds(self):
         self.assertEqual(False, self.guest_2.sufficient_founds(self.room))
+
+    def test_guest_buy_in_bar(self):
+        self.guest.spend_cash(self.room.price)
+        self.assertEqual(87.01, self.guest.cash)
     
