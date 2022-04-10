@@ -48,5 +48,13 @@ class Room:
     def sell_entry_fee (self, guest, bar, ticket_price):
         guest.spend_cash(ticket_price)
         bar.increase_entry_fee(ticket_price)
+
+    def sell_drink (self, guest, bar, drink_price):
+        guest.spend_cash(drink_price)
+        bar.increase_entry_fee(drink_price)
+    
+    def sell_food (self, guest, bar, food_price):
+        guest.spend_cash(food_price)
+        bar.increase_entry_fee(food_price)
     
         

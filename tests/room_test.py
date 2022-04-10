@@ -1,5 +1,7 @@
 import unittest
 
+from src.food import Food
+from src.drink import Drink
 from src.bar import Bar
 from src.guest import Guest
 from src.room import Room
@@ -70,3 +72,23 @@ class TestRoom(unittest.TestCase):
     def test_check_sell_ticket_in_bar_increase_bar_sales(self):
         self.room.sell_entry_fee(self.guest_1, self.bar, self.room.price)
         self.assertEqual(12.99, self.bar.sales)
+
+    def test_check_sell_drink_in_bar_reduce_guest_cash(self):
+        self.drink = Drink("cocktail", 8.99)
+        self.room.sell_drink(self.guest_1, self.bar, self.drink.price)
+        self.assertEqual(91.01, self.guest_1.cash)
+
+    def test_check_sell_drink_in_bar_increase_bar_sales(self): 
+        self.drink = Drink("cocktail", 8.99)  
+        self.room.sell_drink(self.guest_1, self.bar, self.drink.price)
+        self.assertEqual(8.99, self.bar.sales)  
+    
+    def test_check_sell_food_in_bar_reduce_guest_cash(self):
+        self.food = Food("nachos", 12.99)
+        self.room.sell_food(self.guest_1, self.bar, self.food.price)
+        self.assertEqual(87.01, self.guest_1.cash)
+
+    def test_check_sell_food_in_bar_increase_bar_sales(self): 
+        self.food = Food("nachos", 12.99)  
+        self.room.sell_food(self.guest_1, self.bar, self.food.price)
+        self.assertEqual(12.99, self.bar.sales) 
